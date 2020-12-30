@@ -33,34 +33,51 @@ class Item{
     }
 }
 
+const output = elementFactory("div");
+const items = [];
 const cart = {};
 addItem.addEventListener("click",function(){
     const item = new Item(itemInput.value, costInput.value); // input values to create items
+    if(items.indexOf(itemInput.value) >= 0){
+        alert("Item already exists")
+    }else{
+    items.push(itemInput.value)
+    console.log(items)
     const display = elementFactory("div",{class:"display"}); // display the item 
     display.innerHTML = `${item.name} <br> $${item.cost}`;
-
     display.addEventListener("click",function(){
         let itemAdded = item.name.toLowerCase();
         if(!cart[itemAdded]){
             cart[itemAdded] = {
                 name : item.name,
                 cost : item.cost,
-                quantity : 1
+                quantity : 1,
+                subtotal : function(){
+                    return this.quantity * this.cost
+                }
             }
         }else{
             cart[itemAdded].quantity++
         }
+      relist();
     })
-    
+    }
+    itemInput.value ="";
+    costInput.value ="";
+
 });
-console.log(cart);
-/*
-const output = elementFactory("div");
-output.innerHTML = ""
 
 function relist(){
+    output.innerHTML = "";
+    let total = 0;
+
     for(let product in cart){
-        output.innerHTML += `${cart[product].name}`
+        let subTotal = cart[product].subtotal();
+        // using product only gives access to the name
+        // using cart[product] gives access to the object
+        output.innerHTML += `${cart[product].name} : $${cart[product].cost} *`;
+        output.innerHTML += `${cart[product].quantity} = $${subTotal} <br>`;
+        total += subTotal;
     }
+   output.innerHTML += ` Total = $${total}`
 }
-*/
