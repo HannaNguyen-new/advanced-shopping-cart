@@ -1,0 +1,16 @@
+.btn{
+    width:100px;
+    height:20px;
+    margin:5px;
+}
+
+.input{
+    margin:5px;
+}
+
+.display{
+    display: inline-block;
+    margin: 5px;
+    padding:5px;
+    border: 1px solid #ddd;
+}
