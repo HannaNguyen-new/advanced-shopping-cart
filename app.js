@@ -41,8 +41,7 @@ addItem.addEventListener("click",function(){
     if(items.indexOf(itemInput.value) >= 0){
         alert("Item already exists")
     }else{
-    items.push(itemInput.value)
-    console.log(items)
+    items.push(itemInput.value);
     const display = elementFactory("div",{class:"display"}); // display the item 
     display.innerHTML = `${item.name} <br> $${item.cost}`;
     display.addEventListener("click",function(){
